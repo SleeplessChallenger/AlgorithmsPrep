@@ -1,4 +1,32 @@
 class Solution {
+    public String reverseWords(String s) {
+        StringBuilder sb = new StringBuilder();
+        final List<String> stack = new ArrayList<>();
+
+        for(int i = 0; i < s.length(); i++) {
+            char curr = s.charAt(i);
+
+            if (Character.isWhitespace(curr) && sb.length() > 0) {
+                stack.add(sb.toString());
+                sb = new StringBuilder();
+            } else if (!Character.isWhitespace(curr)) {
+                sb.append(curr);
+            }
+        }
+
+        if (sb.length() > 0) {
+            stack.add(sb.toString());
+        }
+
+        Collections.reverse(stack);
+
+        return stack.stream()
+                .map(v -> String.valueOf(v))
+                .collect(Collectors.joining(" "));
+    }
+}
+
+class Solution {
     /*
     the sky is  blue
 
